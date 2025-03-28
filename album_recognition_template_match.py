@@ -5,11 +5,13 @@ from picamera2 import Picamera2
 
 # Initialize Raspberry Pi Camera
 picam2 = Picamera2()
-picam2.configure(picam2.create_preview_configuration(main={"size": (640, 480)}))
+config = picam2.create_preview_configuration({'format': 'RGB888'})
+picam2.configure(config)
 picam2.start()
 
+
 # Set the path where album cover images are stored
-FOLDER_PATH = "/home/mauricio/album_covers"
+FOLDER_PATH = "/home/mauricio/album_recognition/album_covers"
 
 # Function to load album cover images
 def load_album_covers(folder_path):
