@@ -66,7 +66,7 @@ album_covers, orb = load_album_covers("album_covers")
 
 while True:
     frame = picam2.capture_array()
-    frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
     matched_album = match_album(frame, album_covers, orb)
 
