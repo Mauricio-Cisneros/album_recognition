@@ -5,9 +5,8 @@ import os
 
 # Initialize camera
 picam2 = Picamera2()
-picam2.preview_configuration.main.size = (640, 480)
-picam2.preview_configuration.main.format = "RGB888"
-picam2.configure("preview")
+config = picam2.create_preview_configuration({'format': 'RGB888'})
+picam2.configure(config)
 picam2.start()
 
 
@@ -62,12 +61,11 @@ def match_album(frame, album_covers, orb, threshold=10):
 
 
 # Load album covers
-album_covers, orb = load_album_covers("album_covers")
+album_covers, orb = load_album_covers(folder_path)
 
 while True:
+    
     frame = picam2.capture_array()
-    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-
     matched_album = match_album(frame, album_covers, orb)
 
     if matched_album:
