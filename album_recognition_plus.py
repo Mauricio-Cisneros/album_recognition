@@ -136,13 +136,20 @@ print("Press 'i' to toggle info mode. Press 'q' to quit.")
 while True:
     frame = picam2.capture_array()
 
+
+    height, width, _ = frame.shape
+    min_dim = min(height, width)
+    start_x = (width - min_dim) // 2
+    start_y = (height - min_dim) // 2
+    square_frame = frame[start_y:start_y+min_dim, start_x:start_x+min_dim]
+
     if show_info and locked_album:
         matched_album = locked_album
     else:
-        matched_album = match_album(frame, album_covers, orb)
+        matched_album = match_album(square_frame, album_covers, orb)
 
     if matched_album:
-        cv2.putText(frame, f"Matched: {matched_album}", (20, 40),
+        cv2.putText(square_frame, f"Matched: {matched_album}", (20, 40),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
 
         if show_info and matched_album in album_info:
@@ -155,10 +162,10 @@ while True:
                 f"Genre: {info['genre']}",
                 f"Length: {info['length']}"
             ]:
-                cv2.putText(frame, line, (20, y), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+                cv2.putText(square_frame, line, (20, y), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
                 y += 25
 
-    cv2.imshow("Album Recognition", frame)
+    cv2.imshow("Album Recognition", square_frame)
 
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
