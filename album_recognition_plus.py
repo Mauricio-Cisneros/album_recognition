@@ -9,7 +9,7 @@ config = picam2.create_preview_configuration({'format': 'RGB888'})
 picam2.configure(config)
 picam2.start()
 
-folder_path = "/home/mauriciocisneros/album_recognition/album_covers"
+folder_path = "/home/mauriciocisneros/Documents/GitHub/album_recognition/album_covers"
 
 # Album metadata dictionary
 album_info = {
@@ -27,8 +27,8 @@ album_info = {
         "genre": "Indie Pop / Dream Pop",
         "length": "32:38"
     },
-    "Close to the Edge": {
-        "title": "Close to the Edge",
+    "Fragile": {
+        "title": "Fragile",
         "artist": "Yes",
         "year": 1972,
         "genre": "Progressive Rock",
