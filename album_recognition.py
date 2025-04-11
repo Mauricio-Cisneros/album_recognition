@@ -10,7 +10,7 @@ picam2.configure(config)
 picam2.start()
 
 
-folder_path = "/home/mauricio/album_recognition/album_covers"
+folder_path = "/home/mauriciocisneros/album_recognition/album_covers"
 
 # Function to load album covers
 def load_album_covers(folder_path):
